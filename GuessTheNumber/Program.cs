@@ -8,37 +8,7 @@
         Klass: NET23
         */
 
-        static string CheckGuess(int number, int guess) //method to return answers to first solution
-        {
-            if (number > guess)
-            {
-                return "Tyvärr, du gissade för lågt!";
-            }
-            else if (number < guess)
-            {
-                return "Tyvärr, du gissade för högt!";
-            }
-            else
-            {
-                return "Wohoo! Du klarade det!";
-            }
-        }
-
-        static string CheckGuessSecondSolution(int changeableNumber, int guess)//method to return answers to second solution
-        {
-            if (changeableNumber > guess)
-            {
-                return "Tyvärr, du gissade för lågt!";
-            }
-            else if (changeableNumber < guess)
-            {
-                return "Tyvärr, du gissade för högt!";
-            }
-            else
-            {
-                return "Wohoo! Du klarade det!";
-            }
-        }
+        
 
         static void Main(string[] args)
         {
@@ -97,7 +67,8 @@
             while (j < y)
             {
                 int guess = Int32.Parse(Console.ReadLine());
-                string result = CheckGuessSecondSolution(changeableNumber, guess);
+                int randomizeAnswer = random.Next(0, 4);
+                string result = CheckGuessSecondSolution(changeableNumber, guess, randomizeAnswer);
                 Console.WriteLine(result);
                 if (result == "Wohoo! Du klarade det!")
                 {
@@ -111,6 +82,41 @@
             if (j == y)
             {
                 Console.WriteLine($"Tyvärr, du lyckades inte gissa talet på {y} försök!");
+            }
+        }
+
+        static string CheckGuess(int number, int guess) //method to return answers to first solution
+        {
+            if (number > guess)
+            {
+                return "Tyvärr, du gissade för lågt!";
+            }
+            else if (number < guess)
+            {
+                return "Tyvärr, du gissade för högt!";
+            }
+            else
+            {
+                return "Wohoo! Du klarade det!";
+            }
+        }
+
+        static string CheckGuessSecondSolution(int changeableNumber, int guess, int randomizeAnswer)//method to return answers to second solution
+        {
+            if (changeableNumber > guess)
+            {
+                string[] lowGuess = {"Tyvärr, du gissade för lågt!", "Attsicken, för låg gissning!", "Ops, fel. Gissa högre!", "Pyttsingen, för låg gissning!", "Hehe, du gissade för lågt!"};
+            return lowGuess[randomizeAnswer];
+        }
+        else if (changeableNumber < guess)
+        {
+            string[] highGuess = { "Haha! Det var för högt!", "Bra gissat, men det var för högt!", "Tyvärr, du gissade för högt!", "Nämen, du gissade visst för högt!", "Ojdå, blev visst lite för hög gissning!" };
+            return highGuess[randomizeAnswer];
+
+            }
+            else
+            {
+                return "Wohoo! Du klarade det!";
             }
         }
     }
