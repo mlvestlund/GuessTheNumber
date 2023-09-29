@@ -48,36 +48,50 @@
 
             /*********************  SECOND SOLUTION  *********************/
 
-            //Adds possibility to change degree of difficulty
             Console.WriteLine("Nu får du välja svårighetsgrad själv");
-            Console.WriteLine("Upp till vilket tal vill du kunna gissa på?");
-            int x = Int32.Parse(Console.ReadLine());
-            int targetNumber = random.Next(1, x); //Gives a random number up to x, users chosen number
-            Console.WriteLine("Hur många möjliga försök vill du ha?");
-            int y = Int32.Parse(Console.ReadLine());
-            Console.WriteLine($"Välkommen! Jag tänker på ett nummer. Kan du gissa vilket? Du får {y} försök.");
 
-            //Guessing-loop
-            int j = 0;
-            while (j < y)
+            //Adds possibility to change degree of difficulty
+            bool playAgain = true; //true at start and asks if to quit at the end of game
+            while (playAgain)
             {
-                int guess = Int32.Parse(Console.ReadLine());
-                int answerRandomizer = random.Next(0, 4);
-                string Answer = CheckGuessSecondSolution(targetNumber, guess, answerRandomizer);
-                Console.WriteLine(Answer);
-                if (Answer == "Wohoo! Du klarade det!")
+                Console.WriteLine("Upp till vilket tal vill du kunna gissa på?");
+                int x = Int32.Parse(Console.ReadLine());
+                int targetNumber = random.Next(1, x); //Gives a random number up to x, users chosen number
+                Console.WriteLine("Hur många möjliga försök vill du ha?");
+                int y = Int32.Parse(Console.ReadLine());
+                Console.WriteLine($"Välkommen! Jag tänker på ett nummer. Kan du gissa vilket? Du får {y} försök.");
+
+                //Guessing-loop
+                int j = 0;
+                while (j < y)
                 {
-                    break;
+                    int guess = Int32.Parse(Console.ReadLine());
+                    int answerRandomizer = random.Next(0, 4);
+                    string Answer = CheckGuessSecondSolution(targetNumber, guess, answerRandomizer);
+                    Console.WriteLine(Answer);
+                    if (Answer == "Wohoo! Du klarade det!")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        j++;
+                    }
                 }
-                else
+                if (j == y)
                 {
-                    j++;
+                    Console.WriteLine($"Tyvärr, du lyckades inte gissa talet på {y} försök!");
+                }
+                Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("Vill du spela igen? Ja/Nej");
+                string playAgainResponse = Console.ReadLine().ToLower();
+                if (playAgainResponse != "ja")
+                {
+                    playAgain = false;
                 }
             }
-            if (j == y)
-            {
-                Console.WriteLine($"Tyvärr, du lyckades inte gissa talet på {y} försök!");
-            }
+            
         }
 
 
